@@ -1,0 +1,31 @@
+# Instala o Tesseract padrão
+!sudo apt install tesseract-ocr
+# Instala agora o tesseract para português (por)
+!sudo apt install tesseract-ocr-por
+# Instala a biblioteca python para utilizar o tesseract
+!pip install pytesseract
+
+# Instala o pacote de pdf
+!apt-get install poppler-utils
+# Instala a biblioteca python para utilizar o pdf2image
+!pip install pdf2image
+from PIL import Image 
+import pytesseract 
+from pdf2image import convert_from_path 
+
+# Carrega o PDF e armazenas todas as páginas separadamente
+# na variável
+imagem_paginas = convert_from_path('pdf_test.pdf') 
+  
+# Salvando cada imagem das páginas em um arquivo
+# Voce precisa criar um diretorio chamado "paginas"
+# na mesma pasta onde este notebook esta armazenado 
+for i,pagina in enumerate(imagem_paginas): 
+    # PDF pagina 1 -> pagina_1.png  
+    # PDF pagina 2 -> pagina_2.png  
+    # .... 
+    filename = "paginas/pagina_"+str(i)+".png"
+      
+    # Salavando a imagen da página em um arquivo
+    print('Gravando pagina: ',filename)
+    pagina.save(filename, 'PNG') 
